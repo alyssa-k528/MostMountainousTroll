@@ -4,5 +4,5 @@
 
 
 // Example of extracting text and sending it to the background script
-let pageText = document.body.innerText; // Simplistic example
-chrome.runtime.sendMessage({text: pageText});
+let pageText = document.body.innerText; // Get text from the page
+chrome.runtime.sendMessage({text: pageText}); // Send it to the background script

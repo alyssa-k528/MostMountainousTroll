@@ -1,0 +1,11 @@
+{
+    "manifest_version": 3,
+    "name": "Mountain Troll",
+    "version": "1.0",
+    "description": "Brief description",
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "troll.png"
+    }
+  }
+  

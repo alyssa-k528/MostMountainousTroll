@@ -1,0 +1,13 @@
+.container{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recordButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

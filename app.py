@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import aubio
 from pydub import AudioSegment
+# venv\Scripts\activate
 # python3 app.py
 
 audio = AudioSegment.from_file("Recording.m4a", format="m4a")

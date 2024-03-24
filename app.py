@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import aubio
 import pandas as pd
 import json
@@ -16,6 +16,13 @@ def analyze_pitch(data):
     highest_pitch = data['highest_pitch']
     lowest_pitch = data['lowest_pitch']
     return average_pitch, highest_pitch, lowest_pitch
+
+
+
+@app.route('/', methods=['POST'])
+def handle_post_request():
+    # Handle the POST request here
+    return 'POST request received'
 
 
 # this function will analyze the user's audio file and return the pitch data in a JSON format

@@ -3,6 +3,7 @@ import aubio
 import csv
 from pydub import AudioSegment
 import pandas as pd
+import json
 
 
 app = Flask(__name__)
@@ -12,23 +13,12 @@ def index():
     return 'Upload an audio file to analyze pitch range.'
 
 @app.route('/analyze', methods=['POST'])
-def analyze_pitch():
-    if 'file' not in request.files:
-        return 'No file part'
-    
-    file = request.files['file']
-    
-    if file.filename == '':
-        return 'No selected file'
-    
-    # Save the uploaded file
-    audio_path = "Recording.wav"
-    file.save(audio_path)
-    
-    # Analyze pitch using Aubio
-    pitches = analyze_audio(audio_path)
-    
-    return jsonify({'pitches': pitches})
+def analyze_pitch(json_data):
+    data = json.loads(json_data)
+    average_pitch = data['pitches']['average_pitch']
+    highest_pitch = data['pitches']['highest_pitch']
+    lowest_pitch = data['pitches']['lowest_pitch']
+    return average_pitch, highest_pitch, lowest_pitch
 
 def analyze_audio(audio_path):
     pitches = []
@@ -68,35 +58,44 @@ def analyze_audio(audio_path):
 
 
 
-def find_lowest_difference(csv_file):
-    csv_file = 'songs.csv'
+def find_lowest_difference(csv_file, average_pitch, highest_pitch, lowest_pitch):
     songs = pd.read_csv(csv_file)
-    # min_lowest_diff = float('inf')  # Initialize with positive infinity
-    # min_lowest_diff_index = None
-    
+
     min_freq = songs['Min. Freq']
     max_freq = songs['Max. Freq']
-    # lowest_pitch = songs['lowest_pitch']
-    # highest_pitch = songs['highest_pitch']
-        
+
     # Calculate differences
-    mindiff = abs(min_freq - 0.1)
-    maxdiff = abs(max_freq - 0.1)
+    mindiff = abs(min_freq - lowest_pitch)
+    maxdiff = abs(max_freq - highest_pitch)
     total_diff = mindiff + maxdiff
-        
-    # Update minimum difference if needed
-    # if total_diff < min_lowest_diff:
-    #     min_lowest_diff = total_diff
-    #     min_lowest_diff_index = index
     
-    # return min_lowest_diff, min_lowest_diff_index
-    return mindiff, maxdiff
+    # Find the index of the row with the minimum total difference
+    min_index = total_diff.idxmin()
+
+    # Retrieve the row with the minimum total difference
+    row_with_min_diff = songs.iloc[min_index]
+
+    # Extract specific columns (1, 2, and 5)
+    relevant_columns = row_with_min_diff.iloc[[0, 1, 4]]
+    
+    return relevant_columns
+
+
+json_data = '''
+{
+    "pitches": {
+        "average_pitch": 715.7707580192802,
+        "highest_pitch": 500.0,
+        "lowest_pitch": 100.91373062133789
+    }
+}
+'''
 
 # Call the function to find the lowest difference and index
+average_pitch, highest_pitch, lowest_pitch = analyze_pitch(json_data)
 csv_file = 'songs.csv'  # Change to the path of your CSV file
-lowest_difference, song_index = find_lowest_difference(csv_file)
+lowest_difference = find_lowest_difference(csv_file, average_pitch, highest_pitch, lowest_pitch)
 print("Lowest difference:", lowest_difference)
-print("Song index with lowest difference:", song_index)
 
 
 

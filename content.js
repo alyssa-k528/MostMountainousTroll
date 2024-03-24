@@ -54,8 +54,10 @@ function sendAudioToServer(blob) {
   // Send the audio data to the server
   fetch('http://127.0.0.1:5000/analyze', {
     method: 'POST',
+    mode: 'no-cors', // Set mode to 'no-cors'
     body: formData
-  })
+})
+
   .then(response => {
     if(!response.ok) {
       throw new Error('Failed to send audio to server');

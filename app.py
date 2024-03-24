@@ -24,7 +24,7 @@ def handle_post_request():
     # Handle the POST request here
     return 'POST request received'
 
-
+@app.route('/analyze', methods=['POST'])
 # this function will analyze the user's audio file and return the pitch data in a JSON format
 def analyze_audio(audio_path):
     pitches = []

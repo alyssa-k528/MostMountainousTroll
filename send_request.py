@@ -1,6 +1,8 @@
 import requests
 import json
 
+# Takes values from app.py, and converts it to a json file
+
 def send_audio_file(url, file_path):
     files = {'file': open(file_path, 'rb')}
     response = requests.post(url, files=files)

@@ -2,6 +2,10 @@ from flask import Flask, request, jsonify
 import aubio
 from pydub import AudioSegment
 
+# Converts m4a to wav
+# Interprets vocal range to return max/min/avg vocal range
+# Sends to send_request.py
+
 audio = AudioSegment.from_file("Recording.m4a", format="m4a")
 # Resample to 44100 Hz
 audio = audio.set_frame_rate(44100)

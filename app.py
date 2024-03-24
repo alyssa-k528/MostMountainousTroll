@@ -3,6 +3,7 @@ import aubio
 import pandas as pd
 import json
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 
@@ -17,9 +18,15 @@ def analyze_pitch(data):
     lowest_pitch = data['lowest_pitch']
     return average_pitch, highest_pitch, lowest_pitch
 
+@app.route('/', methods=['POST'])
+def handle_post_request():
+    # Handle the POST request here
+    return 'POST request received'
 
+@app.route('/analyze', methods=['POST'])
 # this function will analyze the user's audio file and return the pitch data in a JSON format
 def analyze_audio(audio_path):
+    
     pitches = []
 
     # Open audio file
@@ -57,6 +64,27 @@ def analyze_audio(audio_path):
         'average_pitch': average_pitch
     }
 
+@app.route('/analyze', methods=['POST'])
+def analyze_audio_route():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No audio file found'}), 400
+    
+    audio_file = request.files['file']
+    if audio_file.filename == '':
+        return jsonify({'error': 'No audio file selected'}), 400
+
+     # Save the file temporarily
+    audio_file_path = 'temp_audio.wav'
+    audio_file.save(audio_file_path)
+
+    # Process audio data
+    try:
+        analysis_result = analyze_audio(audio_file_path)
+        return jsonify(analysis_result)
+    except Exception as e:
+        os.remove(audio_file_path)
+        return jsonify({'error': str(e)}), 500
+
 
 # This function will find the song with the lowest total difference
 def find_lowest_difference(csv_file, audio_path):
@@ -86,6 +114,7 @@ def find_lowest_difference(csv_file, audio_path):
     relevant_columns = row_with_min_diff.iloc[[0, 1, 4]]
     
     return relevant_columns
+    # return relevant_columns.to_dict()
 
 
 @app.route('/')
@@ -98,3 +127,4 @@ print(find_lowest_difference('songs.csv', 'output.wav'))
 if __name__ == '__main__':
     app.run(debug=True)
     
+    # ffmpeg -i Recording.wav -acodec pcm_s16le -ar 44100 -ac 1 output.wav

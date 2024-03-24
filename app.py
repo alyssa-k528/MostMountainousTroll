@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import aubio
 from pydub import AudioSegment
+# python3 app.py
 
 audio = AudioSegment.from_file("Recording.m4a", format="m4a")
 # Resample to 44100 Hz
@@ -36,7 +37,7 @@ def analyze_audio(audio_path):
 
     # Initialize pitches as an empty list
     pitches = []
-    
+
     # Open audio file
     samplerate = 44100
     win_s = 4096

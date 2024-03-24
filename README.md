@@ -11,13 +11,7 @@ Lauren Yip - lya85@sfu.ca
 website that takes user voice input, and extracts their vocal range, and gives them their ideal karaoke song based on pitch.
 
 **Git Repo**
-https://github.com/alyssa-k528/MostMountainousTroll/tree/main
-
-**Interest in Presenting** 
-yes
-
-**post on sfucsss.org**
-yes
+https://github.com/alyssa-k528/MostMountainousTroll
 
 **How to get the Project Started**
 1. clone the repo and then open it in vscode

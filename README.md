@@ -22,9 +22,8 @@ https://github.com/alyssa-k528/MostMountainousTroll
 6. so you must add the ```Recording.wav``` into the github repo manually, replacing the one already there
 7. paste in ```ffmpeg -i Recording.wav -acodec pcm_s16le -ar 44100 -ac 1 output.wav```into the terminal
 8. go into the ```app.py``` and run the program either through the play button or through typing ```python3 app.py``` or ```python app.py``` depending on your python version
-9. in another new terminal, run ```python3 send_request.py```. DO NOT TERMINATE THE ```APP.PY``` TERMINAL
-<br>
- (FYI: the send_request.py is currently buggy, but previously it did work on a inputted .wav file, as can be seen by the data in the ```pitch_analysis_result.json```: <br>
+9. in another new terminal, run ```python3 send_request.py```. DO NOT TERMINATE THE ```APP.PY``` TERMINAL <br>
+(FYI: the send_request.py is currently buggy, but previously it did work on a inputted .wav file, as can be seen by the data in the ```pitch_analysis_result.json```: <br>
 ```{``` <br>
     ```"pitches": {``` <br>
         ```"average_pitch": 715.7707580192802,``` <br>
@@ -34,7 +33,5 @@ https://github.com/alyssa-k528/MostMountainousTroll
 ```}```<br>
 
 so right now the .wav file you have imported in is not currently being analyzed, but once the ```send_request.py``` is fixed, it would be able to extract your pitch data and analyze it against the list of songs we have)
-<br>
 10. then in the terminal running ```app.py```, you would be able to see the output song, artist, and song URL that best fits the pitch of your voice. 
-<br>
-11. tadaaaa! great job!
+9. tadaaaa! great job!

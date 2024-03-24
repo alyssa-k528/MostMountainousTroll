@@ -3,6 +3,9 @@ import aubio
 from pydub import AudioSegment
 
 audio = AudioSegment.from_file("Recording.m4a", format="m4a")
+# Resample to 44100 Hz
+audio = audio.set_frame_rate(44100)
+
 audio.export("Recording.wav", format="wav")
 
 app = Flask(__name__)
@@ -30,6 +33,10 @@ def analyze_pitch():
     return jsonify({'pitches': pitches})
 
 def analyze_audio(audio_path):
+
+    # Initialize pitches as an empty list
+    pitches = []
+    
     # Open audio file
     samplerate = 44100
     win_s = 4096
@@ -41,7 +48,8 @@ def analyze_audio(audio_path):
     pitch_o = aubio.pitch("yin", win_s, hop_s, samplerate)
 
     # Array to store detected pitches
-    pitches = []
+    # Convert pitch values to Python floats
+    pitches = [float(pitch) for pitch in pitches]
 
     # Process audio
     while True:
@@ -60,7 +68,11 @@ def analyze_audio(audio_path):
     lowest_pitch = min(pitches)
     average_pitch = sum(pitches) / len(pitches)
 
-    return {'highest_pitch': highest_pitch, 'lowest_pitch': lowest_pitch, 'average_pitch': average_pitch}
+    return {
+        'highest_pitch': float(highest_pitch) if highest_pitch else None,
+        'lowest_pitch': float(lowest_pitch) if lowest_pitch else None,
+        'average_pitch': float(average_pitch) if average_pitch else None
+    }
 
 
 if __name__ == '__main__':

@@ -45,33 +45,31 @@ function startRecording(){
   });
 }
 
-// Function to send recorded audio to the server
 function sendAudioToServer(blob) {
-  // Create FormData object
   var formData = new FormData();
-  formData.append('file', blob, 'Recording.wav');
-  
-  // Send the audio data to the server
+  formData.append('file', blob);
+
   fetch('http://127.0.0.1:5000/analyze', {
     method: 'POST',
-    mode: 'no-cors', // Set mode to 'no-cors'
+    mode: 'no-cors',
     body: formData
-})
-
+  })
   .then(response => {
-    if(!response.ok) {
+    if (!response.ok) {
       throw new Error('Failed to send audio to server');
     }
     return response.json();
   })
   .then(data => {
     console.log(data);
-    // Optionally handle response data here
+    // Process the analysis result here
   })
   .catch(error => {
     console.error('Error sending audio to server:', error);
   });
 }
+
+// Other functions remain unchanged
 
 // Record audio and save it as a file for processing
 function recordAudio() {

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import aubio
 import pandas as pd
 import json
@@ -63,6 +63,24 @@ def analyze_audio(audio_path):
         'lowest_pitch': lowest_pitch,
         'average_pitch': average_pitch
     }
+
+@app.route('/analyze', methods=['POST'])
+def analyze_audio_route():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No audio file found'}), 400
+    
+    audio_file = request.files['file']
+    if audio_file.filename == '':
+        return jsonify({'error': 'No audio file selected'}), 400
+
+    # Process audio data
+    try:
+        analysis_result = analyze_audio(audio_file)
+        return jsonify(analysis_result)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 
 # This function will find the song with the lowest total difference

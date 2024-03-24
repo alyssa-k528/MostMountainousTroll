@@ -2,9 +2,9 @@
 The trollies
 
 **Group Members**
-Francise Ferrer
-Anne Jiao
-Alyssa Kou
+Francise Ferrer 
+Anne Jiao - aja107@sfu.ca
+Alyssa Kou - aka272@sfu.ca
 Lauren Yip
 
 **Project Description**

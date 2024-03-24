@@ -17,8 +17,6 @@ def analyze_pitch(data):
     lowest_pitch = data['lowest_pitch']
     return average_pitch, highest_pitch, lowest_pitch
 
-
-
 @app.route('/', methods=['POST'])
 def handle_post_request():
     # Handle the POST request here
@@ -109,6 +107,7 @@ def find_lowest_difference(csv_file, audio_path):
     relevant_columns = row_with_min_diff.iloc[[0, 1, 4]]
     
     return relevant_columns
+    # return relevant_columns.to_dict()
 
 
 @app.route('/')
@@ -122,4 +121,3 @@ if __name__ == '__main__':
     app.run(debug=True)
     
     # ffmpeg -i Recording.wav -acodec pcm_s16le -ar 44100 -ac 1 output.wav
-

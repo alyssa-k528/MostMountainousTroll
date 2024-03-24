@@ -27,9 +27,9 @@ function startRecording(){
 function sendAudioToServer(audioChunks) {
   const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
   const formData = new FormData();
-  formData.append('file', audioBlob, 'myRecording.wav');
+  formData.append('file', audioBlob, 'Recording.wav');
 
-  fetch('http://127.0.0.1:5000/analyze', { // Replace with your Flask server URL
+  fetch('http://127.0.0.1:5000', { // Replace with your Flask server URL
     method: 'POST',
     body: formData
   })

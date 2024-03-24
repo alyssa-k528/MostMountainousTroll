@@ -1,5 +1,6 @@
 import requests
 import json
+# python3 send_request.py
 
 # Takes values from app.py, and converts it to a json file
 

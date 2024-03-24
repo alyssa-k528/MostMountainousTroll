@@ -11,26 +11,29 @@ function saveBlob(blob, fileName) {
 }
 
 function startRecording(){
+  navigator.mediaDevices.getUserMedia({ audio: true })
+  .then(stream => {
+    const recorder = new MediaRecorder(stream);
+    const data = [];
 
-  var device = navigator.mediaDevices.getUserMedia({audio:true});
-  var items = [];
-  device.then( stream => {
-    var recorder = new MediaRecorder(stream);
-    recorder.ondataavailable = e => {
-
-      items.push(e.data);
-      if(recorder.state == "inactive")
-      {
-        var blob = new Blob(items, {type: 'audio/wav'});
-        alert(blob.type);
-        saveBlob(blob, 'myRecording.wav');
-      }
-    }
+    recorder.ondataavailable = event => data.push(event.data);
+    recorder.onstop = () => sendAudioToServer(data);
 
     recorder.start();
-    setTimeout(()=>{
-      recorder.stop();
-    }, 4000);
+    setTimeout(() => recorder.stop(), 4000); // Adjust recording time as needed
+  });
+}
 
-    });
+function sendAudioToServer(audioChunks) {
+  const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+  const formData = new FormData();
+  formData.append('file', audioBlob, 'myRecording.wav');
+
+  fetch('http://127.0.0.1:5000/analyze', { // Replace with your Flask server URL
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 }

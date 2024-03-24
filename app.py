@@ -2,16 +2,21 @@ from flask import Flask, request, jsonify
 import aubio
 import csv
 from pydub import AudioSegment
+from flask_cors import CORS
+import pandas as pd
+
 # venv\Scripts\activate
 # python3 app.py
 
 # Converts m4a to wav
 # Interprets vocal range to return max/min/avg vocal range
 # Sends to send_request.py
-import pandas as pd
-
 
 app = Flask(__name__)
+# Allow CORS so that the frontend can make requests to the Flask backend
+# Cross-origin resource sharing
+
+CORS(app)
 
 @app.route('/')
 def index():

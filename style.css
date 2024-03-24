@@ -14,3 +14,16 @@
     align-items: center;
 }
 
+.flipped {
+    transform: scaleX(-1); /* Flip horizontally */
+    /* transform: scaleY(-1); */ /* Flip vertically */
+}
+
+.container1 {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures all elements stay in one row */
+    align-items: center; /* Vertically center elements */
+    justify-content: center; /* Horizontally center elements */
+}
+
+

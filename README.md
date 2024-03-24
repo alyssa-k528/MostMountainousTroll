@@ -16,12 +16,12 @@ I'm Just Ken - Ryan Gosling
 Take on Me - a-ha
 Breaking Free - Troy & Gabriella
 Did I Mention - Mitchell Hope
-Let it Go - Idina Menzel
-Since U Been Gone - Kelly Clarkson
-Still Into You - Paramore
-Big Time Rush - Big Time Rush
-Iris - The Goo Goo Dolls
-Wonderwall - Oasis
-I NEED U - BTS
-Don't Stop Believin' - Journey
-Fly Me to the Moon - Frank Sinatra
+Let it Go - Idina Menzel - 174.61 Hz, 622.25 Hz
+Since U Been Gone - Kelly Clarkson - 196.00 Hz, 784.00 Hz
+Still Into You - Paramore - 293.66 Hz, 587.33 Hz
+Just the way you are - Bruno Mars - 174.61 Hz, 523.25 Hz
+Iris - The Goo Goo Dolls - 146.83 Hz, 440.00 Hz
+Wonderwall - Oasis - 196.00 Hz, 440.00Hz
+Yesterday - Beatles - 146.83 Hz, 349.23 Hz 
+Don't Stop Believin' - Journey - 329.63 Hz, 554.37Hz
+Fly Me to the Moon - Frank Sinatra - 123.47 Hz, 392.00 Hz

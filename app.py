@@ -81,8 +81,6 @@ def analyze_audio_route():
         return jsonify({'error': str(e)}), 500
 
 
-
-
 # This function will find the song with the lowest total difference
 def find_lowest_difference(csv_file, audio_path):
     # Analyze audio to get pitch data
@@ -122,5 +120,4 @@ print(find_lowest_difference('songs.csv', 'Recording.wav'))
 
 if __name__ == '__main__':
     app.run(debug=True)
-    print("AAAA")
     

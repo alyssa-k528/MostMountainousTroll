@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify
 import aubio
+import csv
 from pydub import AudioSegment
 # venv\Scripts\activate
 # python3 app.py
 
-audio = AudioSegment.from_file("Recording.m4a", format="m4a")
-# Resample to 44100 Hz
-audio = audio.set_frame_rate(44100)
+# Converts m4a to wav
+# Interprets vocal range to return max/min/avg vocal range
+# Sends to send_request.py
+import pandas as pd
 
-audio.export("Recording.wav", format="wav")
 
 app = Flask(__name__)
 
@@ -28,6 +29,7 @@ def analyze_pitch():
     
     # Save the uploaded file
     audio_path = "Recording.wav"
+    file.save(audio_path)
     
     # Analyze pitch using Aubio
     pitches = analyze_audio(audio_path)
@@ -35,8 +37,6 @@ def analyze_pitch():
     return jsonify({'pitches': pitches})
 
 def analyze_audio(audio_path):
-
-    # Initialize pitches as an empty list
     pitches = []
 
     # Open audio file
@@ -49,16 +49,12 @@ def analyze_audio(audio_path):
     # Create pitch object
     pitch_o = aubio.pitch("yin", win_s, hop_s, samplerate)
 
-    # Array to store detected pitches
-    # Convert pitch values to Python floats
-    pitches = [float(pitch) for pitch in pitches]
-
     # Process audio
     while True:
         samples, read = s()
         pitch = pitch_o(samples)[0]
         if pitch != 0:  # Filter out zero pitches
-            pitches.append(pitch)
+            pitches.append(float(pitch))
         if read < hop_s: 
             break
 
@@ -71,12 +67,48 @@ def analyze_audio(audio_path):
     average_pitch = sum(pitches) / len(pitches)
 
     return {
-        'highest_pitch': float(highest_pitch) if highest_pitch else None,
-        'lowest_pitch': float(lowest_pitch) if lowest_pitch else None,
-        'average_pitch': float(average_pitch) if average_pitch else None
+        'highest_pitch': highest_pitch,
+        'lowest_pitch': lowest_pitch,
+        'average_pitch': average_pitch
     }
+
+
+
+def find_lowest_difference(csv_file):
+    csv_file = 'songs.csv'
+    songs = pd.read_csv(csv_file)
+    # min_lowest_diff = float('inf')  # Initialize with positive infinity
+    # min_lowest_diff_index = None
+    
+    min_freq = songs['Min. Freq']
+    max_freq = songs['Max. Freq']
+    # lowest_pitch = songs['lowest_pitch']
+    # highest_pitch = songs['highest_pitch']
+        
+    # Calculate differences
+    mindiff = abs(min_freq - 0.1)
+    maxdiff = abs(max_freq - 0.1)
+    total_diff = mindiff + maxdiff
+        
+    # Update minimum difference if needed
+    # if total_diff < min_lowest_diff:
+    #     min_lowest_diff = total_diff
+    #     min_lowest_diff_index = index
+    
+    # return min_lowest_diff, min_lowest_diff_index
+    return mindiff, maxdiff
+
+# Call the function to find the lowest difference and index
+csv_file = 'songs.csv'  # Change to the path of your CSV file
+lowest_difference, song_index = find_lowest_difference(csv_file)
+print("Lowest difference:", lowest_difference)
+print("Song index with lowest difference:", song_index)
+
+
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
+   
+   
+  

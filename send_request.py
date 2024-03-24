@@ -11,7 +11,7 @@ def send_audio_file(url, file_path):
 
 def main():
     url = 'http://127.0.0.1:5000/analyze'  # Your Flask app's /analyze endpoint
-    file_path = 'Recording.wav'  # Path to the audio file
+    file_path = 'output.wav'  # Path to the audio file
     
     result = send_audio_file(url, file_path)
 

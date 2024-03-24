@@ -2,10 +2,10 @@
 The trollies
 
 **Group Members**
-Francise Ferrer 
+Francise Ferrer - ffa21@sfu.ca
 Anne Jiao - aja107@sfu.ca
 Alyssa Kou - aka272@sfu.ca
-Lauren Yip
+Lauren Yip - lya85@sfu.ca
 
 **Project Description**
 website that takes user voice input, and extracts their vocal range, and gives them their ideal karaoke song based on pitch.

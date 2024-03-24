@@ -1,3 +1,11 @@
+.recordButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 .container{
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
@@ -6,8 +14,3 @@
     align-items: center;
 }
 
-.recordButton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

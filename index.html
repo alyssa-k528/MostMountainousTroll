@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sing like a troll</title>
     <link rel="stylesheet" href="style.css">
+    <script src="content.js" defer></script>
 </head>
 <body>
     <p>be gay</p>
@@ -14,13 +15,21 @@
         <p id="output"></p>
     </div>
 
-    <div class="recordButton">
-        <button id="recordButton">Record Note</button>
-    </div>
+    <input type="button"
+    class="recordButton" value="Record Note"
+    onclick="recordAudio()">
 
     <script>
-        <src src="content.js"></src>
+        function recordAudio(){
+            // Add event listener to the button
+            document.querySelector('.recordButton').
+            onclick = recordAudio();             
+        }
+        
     </script>
+
+    <!-- <script type="text/javascript" src="content.js"></script> -->
+
 </body>
 
 </html>

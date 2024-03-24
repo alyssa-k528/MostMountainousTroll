@@ -2,11 +2,22 @@ from flask import Flask, request, jsonify
 import aubio
 import csv
 from pydub import AudioSegment
+from flask_cors import CORS
 import pandas as pd
 import json
 
+# venv\Scripts\activate
+# python3 app.py
+
+# Converts m4a to wav
+# Interprets vocal range to return max/min/avg vocal range
+# Sends to send_request.py
 
 app = Flask(__name__)
+# Allow CORS so that the frontend can make requests to the Flask backend
+# Cross-origin resource sharing
+
+CORS(app)
 
 @app.route('/')
 def index():
@@ -22,7 +33,7 @@ def analyze_pitch(json_data):
 
 def analyze_audio(audio_path):
     pitches = []
-    
+
     # Open audio file
     samplerate = 44100
     win_s = 4096

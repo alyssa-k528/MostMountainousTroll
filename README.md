@@ -32,6 +32,6 @@ https://github.com/alyssa-k528/MostMountainousTroll
     ```}``` <br>
 ```}```<br>
 
-so right now the .wav file you have imported in is not currently being analyzed, but once the ```send_request.py``` is fixed, it would be able to extract your pitch data and analyze it against the list of songs we have)
-10. then in the terminal running ```app.py```, you would be able to see the output song, artist, and song URL that best fits the pitch of your voice. 
+so right now the .wav file you have imported in is not currently being analyzed, but once the ```send_request.py``` is fixed, it would be able to extract your pitch data and analyze it against the list of songs we have) <br>
+10. then in the terminal running ```app.py```, you would be able to see the output song, artist, and song URL that best fits the pitch of your voice. <br>
 9. tadaaaa! great job!

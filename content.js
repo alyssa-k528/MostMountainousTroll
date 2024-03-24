@@ -1,4 +1,10 @@
 function recordAudio(){
+    // Add event listener to the button
+    document.querySelector('.recordButton').
+    onclick = recordAudio();
+}
+
+function recordAudio(){
     // Check if the browser supports the Web Audio API
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         alert('Your browser does not support the Web Audio API!');

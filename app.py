@@ -116,8 +116,10 @@ def index():
     return 'Upload an audio file to analyze pitch range.'
 
 
-print(find_lowest_difference('songs.csv', 'Recording.wav'))
+print(find_lowest_difference('songs.csv', 'output.wav'))
 
 if __name__ == '__main__':
     app.run(debug=True)
     
+    # ffmpeg -i Recording.wav -acodec pcm_s16le -ar 44100 -ac 1 output.wav
+
